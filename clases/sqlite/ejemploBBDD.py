@@ -30,4 +30,14 @@ lista1 = [(1,'Normal 1','Quilmes','Buenos Aires',250),(2,'Gral. San Martín','Sa
 lista2 = [(1,2,1000,'Ramón Mesa',8,1,'rmesa@mail.com'),(2,2,1002,'Tomás Smith',8,1,''),(4,1,101,'Juan Perez',10,3,''),(5,1,105,'Pedro González',9,3,''),(6,5,190,'Roberto Luis Sánchez',8,3,'robertoluissanchez@gmail.com'),(7,2,106,'Martín Bossio',NULL,3,''),(8,4,100,'Paula Remmi',3,1,'mail@mail.com'),(9,4,1234,'Pedro Gómez',6,2,'')]
 
 
-cur.executemany()
+cur.executemany('INSERT INTO escuelas VALUES (?,?,?,?,?)', lista1)
+cur.executemany('INSERT INTO alumnos VALUES (?,?,?,?,?,?,?)', lista2)
+
+query1 = '''SELECT alumnos.legajo, alumnos.nombre, alumnos.nota, alumnos.email, escuelas.nombre, escuelas.localidad, escuelas.provincia FROM alumnos
+INNER JOIN escuelas ON alumnos.id_escuela = escuelas._id'''
+
+for registro in cur.execute(query1):
+    print(registro)
+
+con.commit() #Ejecuta cambios en la BBDD
+con.close()
