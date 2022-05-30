@@ -65,7 +65,7 @@ def leer():
     ON alumnos.id_escuela = escuelas._id WHERE alumnos.legajo = '''
 
     cur.execute(query_leer + legajo.get())
-    resultado = cur.fetchall()
+    resultado = cur.fetchall() #el fetchall me tira el rdo del query
     if resultado == []:
         messagebox.showerror("ERROR", "No existe ese Nro de legajo")
     else:
